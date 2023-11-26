@@ -140,27 +140,46 @@ public class Departamento {
     }
 
     public void gerarRelatorioCurso(String key){
-        if(solicitacaosConcluidas.containsKey(key)){
-            System.out.println("------------"+key+"------------");
-            for(Solicitacao s: solicitacaosConcluidas.get(key)){
-                System.out.println(s.toString());
-            }
-        }
-        else{
-            System.out.println("Nenhuma solicitação encontrada para o curso");
-        }
-        //estou botando os prints aqui pra facilitar e porque não vou fazer a main, mas sei q é incorreto
-    }
-
-    public void gerarRelatorioEspaco(String localizacaoSala){
-        System.out.println("------"+localizacaoSala+"------");
-        for(String key:solicitacaosConcluidas.keySet()){
-            for(Solicitacao s: solicitacaosConcluidas.get(key)){
-                if(s.getEspacoFisico().getLocalizacao().equals(localizacaoSala)){
-                    System.out.println(s);
+        try{
+            BufferedWriter escritor = new BufferedWriter(new FileWriter("relatoriocurso.txt"));
+            if(solicitacaosConcluidas.containsKey(key)){
+                escritor.write(key+"\n");
+                for(Solicitacao s: solicitacaosConcluidas.get(key)){
+                    escritor.write(s.toString()+"\n");
                 }
             }
+            else{
+                System.out.println("Nenhuma solicitação encontrada para o curso");
+            }
+            //estou botando os prints aqui pra facilitar e porque não vou fazer a main, mas sei q é incorreto
+            escritor.close();
+        }catch (IOException e){
+            e.printStackTrace();
         }
+
+
+    }
+
+    public void gerarRelatorioEspaco(String localizacaoSala){//n ta funcionando por algum bug
+        try{
+            BufferedWriter escritor = new BufferedWriter(new FileWriter("relatorioespaco.txt"));
+
+            escritor.write(localizacaoSala+"\n");
+
+            for(String key:solicitacaosConcluidas.keySet()){
+                for(Solicitacao s: solicitacaosConcluidas.get(key)){
+                    if(s.getEspacoFisico().getLocalizacao().equals(localizacaoSala)){
+                        escritor.write(s.toString()+"\n");
+                    }
+                }
+            }
+
+            escritor.close();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+
     }
 
 }

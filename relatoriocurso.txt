@@ -1,0 +1,5 @@
+Ciência da Computação
+Solicitacao{ano=2023, semestre=2, curso='Ciência da Computação', vagas=60, horario=Horario{dias='24', turno='T', num='23'}, tipoSolicitcao='﻿Fixa', dado='Cálculo 1', espacoFisico=﻿301-NORTE}
+Solicitacao{ano=2023, semestre=2, curso='Ciência da Computação', vagas=60, horario=Horario{dias='24', turno='T', num='45'}, tipoSolicitcao='Fixa', dado='Algoritmos', espacoFisico=﻿301-NORTE}
+Solicitacao{ano=2023, semestre=2, curso='Ciência da Computação', vagas=60, horario=Horario{dias='35', turno='T', num='12'}, tipoSolicitcao='Eventual', dado='Ética', espacoFisico=﻿301-NORTE}
+Solicitacao{ano=2023, semestre=2, curso='Ciência da Computação', vagas=60, horario=Horario{dias='6', turno='T', num='12'}, tipoSolicitcao='Eventual', dado='Geometria Análitica', espacoFisico=﻿301-NORTE}

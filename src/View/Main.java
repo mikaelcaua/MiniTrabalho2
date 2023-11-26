@@ -11,8 +11,8 @@ public class Main {
         Departamento departamento = new Departamento("Teste");
         departamento.lerEspacosFisicosArquivo();
         departamento.lerSolicitacaoArquivo();
-//        departamento.gerarRelatorioCurso("BICT");
-        departamento.gerarRelatorioEspaco("301-NORTE");
+        departamento.gerarRelatorioCurso("Ciência da Computação");
+//        departamento.gerarRelatorioEspaco("301-NORTE"); n ta funcionando por algum bug
 
 
     }
