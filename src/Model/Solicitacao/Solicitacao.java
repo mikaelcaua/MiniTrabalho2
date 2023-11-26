@@ -1,5 +1,7 @@
 package Model.Solicitacao;
 
+import Model.EspacoFisico.EspacoFisico;
+
 public class Solicitacao {
     private int ano;
     private int semestre;
@@ -8,8 +10,9 @@ public class Solicitacao {
     private Horario horario;
     private String tipoSolicitcao;
     private String dado;
+    private EspacoFisico espacoFisico;
 
-    public Solicitacao(int ano, int semestre, String curso, int vagas, Horario horario, String tipoSolicitcao, String dado) {
+    public Solicitacao(String tipoSolicitcao,int ano, int semestre, String curso,String dado, int vagas, Horario horario ) {
         this.ano = ano;
         this.semestre = semestre;
         this.curso = curso;
@@ -45,5 +48,27 @@ public class Solicitacao {
 
     public String getDado() {
         return dado;
+    }
+
+    public EspacoFisico getEspacoFisico() {
+        return espacoFisico;
+    }
+
+    public void setEspacoFisico(EspacoFisico espacoFisico) {
+        this.espacoFisico = espacoFisico;
+    }
+
+    @Override
+    public String toString() {
+        return "Solicitacao{" +
+                "ano=" + ano +
+                ", semestre=" + semestre +
+                ", curso='" + curso + '\'' +
+                ", vagas=" + vagas +
+                ", horario=" + horario +
+                ", tipoSolicitcao='" + tipoSolicitcao + '\'' +
+                ", dado='" + dado + '\'' +
+                ", espacoFisico=" + espacoFisico.getLocalizacao() +
+                '}';
     }
 }

@@ -1,7 +1,9 @@
 package Model.EspacoFisico;
 
 import Model.Solicitacao.Horario;
+import Model.Solicitacao.Solicitacao;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class EspacoFisico {
@@ -10,11 +12,13 @@ public class EspacoFisico {
     private String localizacao;
     Hashtable <String, Horario> horarios;
 
-    public EspacoFisico(String tipo, int capacidade, String localizacao) {
+
+    public EspacoFisico( String localizacao,String tipo, int capacidade) {
         this.tipo = tipo;
         this.capacidade = capacidade;
         this.localizacao = localizacao;
         horarios = new Hashtable<>();
+
     }
 
     public String getTipoEspacoFisico() {
