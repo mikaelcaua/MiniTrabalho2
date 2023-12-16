@@ -25,10 +25,9 @@ public class Horario {
 
     @Override
     public String toString() {
-        return "Horario{" +
-                "dias='" + dias + '\'' +
-                ", turno='" + turno + '\'' +
-                ", num='" + num + '\'' +
-                '}';
+        return "Horario: " +
+                "dias= " + dias +
+                ", turno= " + turno +
+                ", horarios= " + num ;
     }
 }

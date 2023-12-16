@@ -139,47 +139,48 @@ public class Departamento {
         return false;
     }
 
-    public void gerarRelatorioCurso(String key){
+    public boolean gerarRelatorioCurso(String key){
         try{
-            BufferedWriter escritor = new BufferedWriter(new FileWriter("relatoriocurso.txt"));
+            BufferedWriter escritor = new BufferedWriter(new FileWriter("relatoriocurso.csv"));
             if(solicitacaosConcluidas.containsKey(key)){
                 escritor.write(key+"\n");
                 for(Solicitacao s: solicitacaosConcluidas.get(key)){
                     escritor.write(s.toString()+"\n");
                 }
+                escritor.close();
+                return true;
             }
-            else{
-                System.out.println("Nenhuma solicitação encontrada para o curso");
-            }
-            //estou botando os prints aqui pra facilitar e porque não vou fazer a main, mas sei q é incorreto
             escritor.close();
         }catch (IOException e){
             e.printStackTrace();
         }
 
-
+        return false;
     }
 
-    public void gerarRelatorioEspaco(String localizacaoSala){//n ta funcionando por algum bug
+    public boolean gerarRelatorioEspaco(String localizacaoSala){//n ta funcionando por algum bug
+
         try{
-            BufferedWriter escritor = new BufferedWriter(new FileWriter("relatorioespaco.txt"));
+            BufferedWriter escritor = new BufferedWriter(new FileWriter("relatorioespaco.csv"));
 
             escritor.write(localizacaoSala+"\n");
 
-            for(String key:solicitacaosConcluidas.keySet()){
+            for(String key: solicitacaosConcluidas.keySet()){
                 for(Solicitacao s: solicitacaosConcluidas.get(key)){
-                    if(s.getEspacoFisico().getLocalizacao().equals(localizacaoSala)){
+                    if(s.toString().contains(localizacaoSala)){
                         escritor.write(s.toString()+"\n");
                     }
                 }
             }
 
             escritor.close();
+            return true;
         }catch(IOException e){
             e.printStackTrace();
         }
-
+        return false;
 
     }
+
 
 }

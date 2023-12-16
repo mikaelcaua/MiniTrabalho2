@@ -60,15 +60,13 @@ public class Solicitacao {
 
     @Override
     public String toString() {
-        return "Solicitacao{" +
-                "ano=" + ano +
-                ", semestre=" + semestre +
-                ", curso='" + curso + '\'' +
-                ", vagas=" + vagas +
-                ", horario=" + horario +
-                ", tipoSolicitcao='" + tipoSolicitcao + '\'' +
-                ", dado='" + dado + '\'' +
-                ", espacoFisico=" + espacoFisico.getLocalizacao() +
-                '}';
+        return  "ano=" + ano +
+                ";semestre= " + semestre +
+                ";curso= " + curso +
+                ";vagas= " + vagas +
+                ";" + horario.toString() +
+                ";" + tipoSolicitcao +
+                ";" + dado +
+                ";" + espacoFisico.getLocalizacao();
     }
 }
