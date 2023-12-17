@@ -69,4 +69,8 @@ public class Solicitacao {
                 ";" + dado +
                 ";" + espacoFisico.getLocalizacao();
     }
+
+    public String localizacaoDebug(){
+        return espacoFisico.getLocalizacao();
+    }
 }

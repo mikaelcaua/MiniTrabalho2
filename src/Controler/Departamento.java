@@ -18,6 +18,8 @@ public class Departamento {
         this.nome = nome;
         espacoFisicos = new ArrayList<>();
         solicitacaosConcluidas = new Hashtable<>();
+        lerEspacosFisicosArquivo();
+        lerSolicitacaoArquivo();
 
     }
 
@@ -148,18 +150,18 @@ public class Departamento {
                     escritor.write(s.toString()+"\n");
                 }
                 escritor.close();
-                return true;
+                return  true;
             }
             escritor.close();
         }catch (IOException e){
             e.printStackTrace();
         }
-
         return false;
+
     }
 
-    public boolean gerarRelatorioEspaco(String localizacaoSala){//n ta funcionando por algum bug
-
+    public boolean gerarRelatorioEspaco(String localizacaoSala){
+        boolean retorno = false;
         try{
             BufferedWriter escritor = new BufferedWriter(new FileWriter("relatorioespaco.csv"));
 
@@ -167,19 +169,21 @@ public class Departamento {
 
             for(String key: solicitacaosConcluidas.keySet()){
                 for(Solicitacao s: solicitacaosConcluidas.get(key)){
-                    if(s.toString().contains(localizacaoSala)){
+                    if(s.localizacaoDebug().contains(localizacaoSala)){
                         escritor.write(s.toString()+"\n");
+                        retorno = true;
                     }
                 }
             }
 
             escritor.close();
-            return true;
+            return retorno;
+
         }catch(IOException e){
             e.printStackTrace();
         }
-        return false;
 
+        return retorno;
     }
 
 
