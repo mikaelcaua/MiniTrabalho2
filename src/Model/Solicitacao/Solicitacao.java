@@ -60,6 +60,18 @@ public class Solicitacao {
 
     @Override
     public String toString() {
+        if (this instanceof SolicitacaoEventual){
+            return  "ano=" + ano +
+                    ";semestre= " + semestre +
+                    ";curso= " + curso +
+                    ";vagas= " + vagas +
+                    ";" + horario.toString() +
+                    ";" + tipoSolicitcao +
+                    ";" + dado +
+                    ";" + espacoFisico.getLocalizacao()+
+                    ";" + ((SolicitacaoEventual) this).getDataInicio()+
+                    ";" + ((SolicitacaoEventual) this).getDataFim();
+        }
         return  "ano=" + ano +
                 ";semestre= " + semestre +
                 ";curso= " + curso +

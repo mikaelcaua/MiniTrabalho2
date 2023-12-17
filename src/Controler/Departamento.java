@@ -3,6 +3,10 @@ package Controler;
 import Model.EspacoFisico.EspacoFisico;
 import Model.Solicitacao.Horario;
 import Model.Solicitacao.Solicitacao;
+import Model.Solicitacao.SolicitacaoEventual;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -36,7 +40,7 @@ public class Departamento {
 
     public void lerEspacosFisicosArquivo(){
         try{
-            BufferedReader arquivo = new BufferedReader(new FileReader("espacosfisicos.csv"));
+            BufferedReader arquivo = new BufferedReader(new FileReader("Banco/espacosfisicos.csv"));
             String linha;
             while((linha=arquivo.readLine())!=null){
                 String[] partes = linha.split(";");
@@ -80,14 +84,47 @@ public class Departamento {
         return new Horario(dias, turno, num);
     }
 
+    public boolean validarDatas(String dataInicio, String dataFim) {
+        // Define o formato esperado para as datas
+        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+        formatoData.setLenient(false); // Impede a interpretação flexível das datas
+
+        try {
+            // Tenta fazer o parse das datas
+            Date dataInicioParse = formatoData.parse(dataInicio);
+            Date dataFimParse = formatoData.parse(dataFim);
+
+            // Verifica se as datas são válidas
+            if (dataInicioParse.after(dataFimParse)) {
+                return false;
+            }
+
+        } catch (ParseException e) {
+            // Se ocorrer uma exceção, a data é inválida
+            return false;
+        }
+
+        // Se não houver exceções, as datas são válidas
+        return true;
+    }
+
     public void lerSolicitacaoArquivo(){
         try{
-            BufferedReader arquivo = new BufferedReader(new FileReader("solicitacoes.csv"));
+            BufferedReader arquivo = new BufferedReader(new FileReader("Banco/solicitacoes.csv"));
             String linha;
             while((linha = arquivo.readLine())!=null){
                 String[] partes = linha.split(";");
                 Solicitacao novo = new Solicitacao(partes[0], Integer.parseInt(partes[1]), Integer.parseInt(partes[2]), partes[3], partes[4], Integer.parseInt(partes[5]), quebrarHorarioArquivo(partes[6]));
-                reservarEspacoFisico(novo);
+                if(novo.getTipoSolicitcao().equals("Eventual")){
+                    novo = new SolicitacaoEventual(partes[0], Integer.parseInt(partes[1]), Integer.parseInt(partes[2]), partes[3], partes[4], Integer.parseInt(partes[5]), quebrarHorarioArquivo(partes[6]), partes[7], partes[8]);
+                    if(validarDatas(((SolicitacaoEventual) novo).getDataInicio(),((SolicitacaoEventual) novo).getDataFim())){
+                        reservarEspacoFisico(novo);
+                    }
+                }
+                else{
+                    reservarEspacoFisico(novo);
+                }
+
             }
         }
         catch(IOException e) {
@@ -143,7 +180,7 @@ public class Departamento {
 
     public boolean gerarRelatorioCurso(String key){
         try{
-            BufferedWriter escritor = new BufferedWriter(new FileWriter("relatoriocurso.csv"));
+            BufferedWriter escritor = new BufferedWriter(new FileWriter("RelatoriosFeitos/relatoriocurso.csv"));
             if(solicitacaosConcluidas.containsKey(key)){
                 escritor.write(key+"\n");
                 for(Solicitacao s: solicitacaosConcluidas.get(key)){
@@ -163,7 +200,7 @@ public class Departamento {
     public boolean gerarRelatorioEspaco(String localizacaoSala){
         boolean retorno = false;
         try{
-            BufferedWriter escritor = new BufferedWriter(new FileWriter("relatorioespaco.csv"));
+            BufferedWriter escritor = new BufferedWriter(new FileWriter("RelatoriosFeitos/relatorioespaco.csv"));
 
             escritor.write(localizacaoSala+"\n");
 
