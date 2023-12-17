@@ -15,8 +15,8 @@ import java.util.Hashtable;
 public class Departamento {
     private String nome;
 
-    ArrayList <EspacoFisico> espacoFisicos;
-    Hashtable <String, ArrayList<Solicitacao>> solicitacaosConcluidas;
+    private ArrayList <EspacoFisico> espacoFisicos;
+    private Hashtable <String, ArrayList<Solicitacao>> solicitacaosConcluidas;
 
     public Departamento(String nome) {
         this.nome = nome;
@@ -132,7 +132,7 @@ public class Departamento {
         }
     }
 
-    public static boolean temLetraComum(String str1, String str2) {
+    public boolean temLetraComum(String str1, String str2) {
         for (char letra : str1.toCharArray()) {
             if (str2.contains(String.valueOf(letra))) {
                 return true;

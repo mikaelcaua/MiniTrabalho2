@@ -10,7 +10,7 @@ public class EspacoFisico {
     private String tipo;
     private int capacidade;
     private String localizacao;
-    Hashtable <String, Horario> horarios;
+    private Hashtable <String, Horario> horarios;
 
 
     public EspacoFisico( String localizacao,String tipo, int capacidade) {
